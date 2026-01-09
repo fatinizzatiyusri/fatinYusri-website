@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FIY Digital Garden | Creative Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Montserrat:wght@300;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        /* Global Styles */
+        body, html { 
+            height: 100%; 
+            color: #555; 
+            line-height: 1.8; 
+            scroll-behavior: smooth; 
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFDF5; /* Soft Cream */
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .w3-wide { 
+            font-family: 'Montserrat', sans-serif; 
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* Skema Warna Bahagian */
+        .section-cream { background-color: #FFFDF5; }
+        .section-pink { background-color: #FFE4E1; } /* Soft Pink */
+        .section-blue { background-color: #151D54; } /*Dark Blue */
+
+        /* ------------------------------------------------------------------
+            NAVBAR MINIMALIST (Centered Pill)
+        ------------------------------------------------------------------ */
+        .w3-top { 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 20px; 
+            pointer-events: none; /* Supaya tidak halangi klik di bawah jika transparent */
+        }
+
+        #myNavbar {
+            pointer-events: auto; /* Aktifkan balik klik untuk navbar */
+            background-color: rgba(255, 253, 245, 0.9) !important;
+            backdrop-filter: blur(10px);
+            width: auto;
+            min-width: 320px;
+            padding: 5px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .brand-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #FF85A2 !important;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            text-decoration: none;
+        }
+
+        .nav-item {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #777 !important;
+            background: transparent !important;
+            transition: 0.3s;
+            border-radius: 50px;
+        }
+
+        .nav-item:hover { color: #FF85A2 !important; background-color: rgba(255, 133, 162, 0.05) !important; }
+
+        /* ------------------------------------------------------------------
+            FLOATING MUSIC PLAYER
+        ------------------------------------------------------------------ */
+        .music-container { position: fixed; bottom: 20px; left: 20px; z-index: 999; }
+        #musicBtn {
+            background: #FF85A2; 
+            color: white; 
+            border: none; 
+            padding: 12px 18px;
+            border-radius: 50px; 
+            cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 14px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: 0.3s;
+        }
+        #musicBtn:hover { transform: scale(1.05); background: #ff6a8e; }
+
+        /* ------------------------------------------------------------------
+            EXPERIENCE CARDS
+        ------------------------------------------------------------------ */
+        .exp-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FF85A2;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        .exp-card:hover { transform: translateX(10px); box-shadow: 0 10px 25px rgba(255, 133, 162, 0.1); }
+        .exp-year { font-weight: 600; color: #FF85A2; font-size: 0.9rem; display: block; margin-bottom: 5px; }
+        .exp-title { font-weight: 600; font-size: 1.1rem; color: #444; margin: 0; }
+        .exp-company { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ------------------------------------------------------------------
+            HERO & GENERAL
+        ------------------------------------------------------------------ */
+        .bgimg-1 { 
+            background-image: url('pictures/background\ image\ izzati.jpg'); 
+            min-height: 100%; 
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed; 
+        }
+
+        .logo-box { 
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(8px); 
+            padding: 40px; 
+            border-radius: 30px; 
+            color: white; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .portfolio-item img { 
+            border-radius: 20px; 
+            transition: 0.4s; 
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .portfolio-item img:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(255, 133, 162, 0.15); }
+
+        .btn-modern { 
+            background-color: #FF85A2 !important; 
+            color: white !important; 
+            border-radius: 50px; 
+            border: none; 
+            padding: 12px 35px !important; 
+            font-size: 13px; 
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-modern:hover { background-color: #444 !important; transform: scale(1.05); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            #myNavbar { min-width: 90%; }
+            .bgimg-1 { background-attachment: scroll; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="music-container">
+    <button id="musicBtn" onclick="toggleMusic()">
+        <i id="musicIcon" class="fa fa-play"></i> <span id="musicStatus">Play Music</span>
+    </button>
+    <audio id="myAudio" loop>
+        <source src="www.joeemilio.co.za - Shane Filan - Beautiful In White (Official Video) (320 KBps).mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<div class="w3-top" id="navParent">
+    <nav class="w3-bar" id="myNavbar">
+        <a href="#home" class="brand-logo">FIY<span style="font-weight:300">.GARDEN</span></a>
+        
+        <div class="w3-hide-small">
+            <a href="about" class="w3-bar-item w3-button nav-item">About</a>
+            <a href="education" class="w3-bar-item w3-button nav-item">Education</a>
+            <a href="experience" class="w3-bar-item w3-button nav-item">Experience</a>
+            <a href="gallery.html" class="w3-bar-item w3-button nav-item">Gallery</a>
+            <a href="contact" class="w3-bar-item w3-button nav-item">Contact</a>
+        </div>
+
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium nav-item" onclick="toggleMobileNav()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+</div>
+
+<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-card w3-round-xlarge" style="position:fixed; top:75px; width:80%; left:10%; z-index:1000;">
+    <a href="about" class="w3-bar-item w3-button w3-center" onclick="toggleMobileNav()">About</a>
+    <a href="education" class="w3-bar-item w3-button w3-center" onclick="toggleMobileNav()">Education</a>
+    <a href="experience" class="w3-bar-item w3-button w3-center" onclick="toggleMobileNav()">Experience</a>
+    <a href="portfolio" class="w3-bar-item w3-button w3-center" onclick="toggleMobileNav()">Gallery</a>
+    <a href="contact" class="w3-bar-item w3-button w3-center" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<div class="bgimg-1 w3-display-container" id="home">
+    <div class="w3-display-middle">
+        <div class="logo-box w3-center">
+            <h2 class="w3-xxlarge">PIECES OF <br> MY WORLD </h2>
+            <p style="letter-spacing: 5px; font-size: 10px; margin-top: 10px;">DIGITAL GARDEN BY FIY</p>
+        </div>
+    </div>
+</div>
+
+<div class="w3-padding-64 section-cream reveal" id="about">
+    <div class="w3-content w3-container">
+        <h3 class="w3-center w3-wide">ABOUT ME</h3>
+        <div class="w3-row w3-padding-32">
+            <div class="w3-col m6 w3-center w3-padding-large">
+                <img src="pictures/me.jpeg" class="w3-round w3-image w3-card-4" alt="Fatin" style="max-width:400px">
+            </div>
+            <div class="w3-col m6 w3-padding-large">
+                <p> Hii !! </p>
+                <p> I am Fatin Izzati binti Yusri. I was born at Hospital Tunku Ampuan Jamaah, Sabak Bernam and I live with my family in Sekinchan, Selangor. I have 5 siblings and I am the third child. In my siblings, there are 4 girls and 1 boy. What is interesting about my siblings is that all the girls are named Fatin. So every time my mother called Fatin, all the Fatins would gather to make it easier for her without having to call out all of our names . </p>
+                <p> As for hobby. I have two hobbies that i love to do during different my personal time and with peoples . The hobby that i do during my personal time is reading novels. I have a lot of novels at home from different kind of genres like romantic, fiction, horror and Science fiction. But my favorite genre is horror one. I love the feeling when ypu feel excited but at the same time scare to know what the next scene. The second hobby is playing chess with my family or friends . I love playing chess because its time for me to sharpen the speed and efficiency of the brain in finding solutions quickly. I also love to see and learn new trick from my opposite players. Thats how i improve and chill with my family plus all my family love to play chess too! </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-padding-64 section-pink reveal" id="education">
+    <div class="w3-content w3-container">
+        <h3 class="w3-center w3-wide">EDUCATION</h3>
+        <div class="w3-row w3-padding-32">
+            <div class="w3-col m12">
+                <p class="w3-center" style="max-width: 800px; margin: auto; padding-bottom: 20px;">
+                    I am a Diploma in Information Management student with a strong interest in records management, documentation, and digital content creation. Through my academic journey and industrial training experience, I have developed skills in organizing information, administrative support, and creative design. I am passionate about learning, self-growth, and turning ideas into meaningful digital work.
+                </p>
+                
+                <div class="exp-card">
+                    <span class="exp-year">2023 – 2026</span>
+                    <h4 class="exp-title">Diploma in Information Management (CDIM110)</h4>
+                    <span class="exp-company">Universiti Teknologi MARA (UiTM)</span>
+                    <div class="w3-row w3-margin-top">
+                        <div class="w3-col m6">
+                            <p><strong><i class="fa fa-book"></i> Key Subjects Learned:</strong></p>
+                            <ul style="padding-left: 20px;">
+                                <li>Records Management</li>
+                                <li>Information Organization</li>
+                                <li>Electronic Publishing</li>
+                                <li>Database Management</li>
+                            </ul>
+                        </div>
+                        <div class="w3-col m6">
+                            <p><strong><i class="fa fa-star"></i> Core Skills:</strong></p>
+                            <ul style="padding-left: 20px;">
+                                <li>Digital & Administrative Skills</li>
+                                <li>Information Archiving</li>
+                                <li>Systems Documentation</li>
+                                <li>Creative Content Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card" style="flex: 1; min-width: 300px; margin-bottom: 0; display: flex; align-items: center; gap: 15px;">
+    
+                <div style="flex: 1;">
+                    <span class="exp-year">2018 - 2022</span>
+                    <h4 class="exp-title">Sijil Pelajaran Malaysia (SPM)</h4>
+                    <span class="exp-company">SAM PASIR PANJANG</span>
+                        <p style="margin-top: 10px;">
+                            <i class="fa fa-trophy w3-text-pink"></i> Achieved <strong>7A's</strong> in SPM<br>
+                            <i class="fa fa-certificate w3-text-pink"></i> Recipient of <strong>Anugerah Pelajar Mithali</strong>
+                        </p>
+                </div>
+
+                <div style="display: flex; flex-direction: row; gap: 10px; flex-shrink: 0;">
+                    <img src="pictures/SPM Achievement.jpeg" class="w3-round w3-card-4" alt="Achievement" style="width: 200px; height: auto; display: block;">
+                    <img src="pictures/GRADUATION.jpeg" class="w3-round w3-card-4" alt="Graduation" style="width: 200px; height: auto; display: block;">
+                 </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-padding-64 section-cream reveal" id="experience">
+    <div class="w3-content w3-container">
+        <h3 class="w3-center w3-wide">EXPERIENCE</h3>
+        <p class="w3-center w3-margin-bottom" style="font-style: italic;">"Every shot tells a story."</p>
+        
+        <div class="w3-row-padding w3-margin-top">
+            <div class="w3-col m12">
+
+    <div class="exp-card" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px;">
+    
+        <div style="flex: 1;">
+            <span class="exp-year">July 2025 - Sept 2025</span>
+            <h4 class="exp-title" style="margin: 5px 0; font-weight: bold;">Internship</h4>
+            <span class="exp-company" style="color: #888; text-transform: uppercase; font-size: 0.9em;">Pejabat Pendidikan Daerah Sabak Bernam</span>
+        
+                <ul style="list-style-type: none; padding: 0; margin-top: 15px;">
+                    <li style="margin-bottom: 8px;">• Improved information and documentation management skills.</li>
+                    <li style="margin-bottom: 8px;">• Improved professional and soft skills.</li>
+                    <li style="margin-bottom: 8px;">• Exposure to real work environments and handling sensitive cases</li>
+                </ul>
+         </div>
+
+        <div style="display: flex; flex-direction: row; gap: 10px; flex-shrink: 0;">
+                    <img src="pictures/SV internship.jpeg" class="w3-round w3-card-4" alt="Achievement" style="width: 200px; height: auto; display: block;">
+                    <img src="pictures/intern.jpeg" class="w3-round w3-card-4" alt="Graduation" style="width: 200px; height: auto; display: block;">
+                 </div>
+    
+    </div>
+
+        <div class="exp-card">
+            <span class="exp-year">March 2022 - Sept 2022</span>
+                <h4 class="exp-title">Waitress</h4>
+                <span class="exp-company"> Restoran Terapung</span>
+                    <p>
+                        • Provided high-quality customer service in a fast-paced dining environment, ensuring guest satisfaction.<br>
+                        • Took accurate food and drink orders and delivered orders promptly.<br>
+                        • Handled customer complaints with professionalism and resolved issues efficiently.
+                    </p>
+
+        <div style="display: flex; flex-direction: row; gap: 10px; flex-shrink: 0;">
+                    <img src="pictures/restoran terapung.jpg" class="w3-round w3-card-4" alt="Achievement" style="width: 200px; height: auto; display: block;">
+                    
+                 </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-padding-64 section-pink reveal" id="portfolio">
+    <div class="w3-center w3-padding-64">
+    <h1 class="w3-wide">
+        <a href="gallery.html" style="text-decoration: none; color: inherit; cursor: pointer;">GALLERY</a>
+    </h1>
+    <p><i>"click to see explore more about my gallery"</i></p>
+</div>
+        <div class="w3-row-padding w3-center w3-margin-top">
+            <div class="w3-col m3 s6 portfolio-item w3-margin-bottom">
+                <img src="pictures/fatin melaka.jpeg" style="width:100%" alt="Playful">
+            </div>
+            <div class="w3-col m3 s6 portfolio-item w3-margin-bottom">
+                <img src="pictures/family.jpeg" style="width:100%" alt="Street">
+            </div>
+            <div class="w3-col m3 s6 portfolio-item w3-margin-bottom">
+                <img src="pictures/food.jpeg" style="width:100%" alt="Achievement">
+            </div>
+            <div class="w3-col m3 s6 portfolio-item w3-margin-bottom">
+                <img src="pictures/flower.jpeg" style="width:100%" alt="Flavour">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-padding-64 section-blue reveal" id="contact">
+    <div class="w3-content w3-container">
+        <h3 class="w3-center w3-wide w3-text-white">SAY HELLO!</h3>
+        <div class="w3-row w3-padding-32">
+            <div class="w3-col m12 w3-center w3-text-white">
+                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=fatinizzatiyusri05@gmail.com" target="_blank" style="text-decoration:none;"><i class="fa fa-envelope w3-text-pink"></i> fatinizzatiyusri05@gmail.com</a></p>
+                <p><a href="tel:0173209965" style="text-decoration:none;"><i class="fa fa-phone w3-text-pink"></i> 017 320 9965</a></p>
+                <p><a href="https://www.google.com/maps/search/?api=1&query=Selangor+Malaysia" target="_blank" style="text-decoration:none;"><i class="fa fa-map-marker w3-text-pink"></i> Selangor, Malaysia</a></p>
+                <a href="https://wa.me/60173209965" target="_blank" class="btn-modern w3-margin-top">SEND MESSAGE</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="w3-center w3-white w3-padding-48">
+    <div class="w3-xlarge w3-section">
+        <a href="https://www.instagram.com/fatynizz_/?hl=ms" target="_blank" style="text-decoration:none;">
+            <i class="fa fa-instagram w3-hover-opacity w3-text-pink"></i>
+        </a>
+        <a href="https://www.tiktok.com/@fatynizzy?lang=ms-MY" target="_blank" style="text-decoration:none; margin-left:15px;">
+            <i class="fa fa-music w3-hover-opacity w3-text-pink"></i>
+        </a>
+    </div>
+    <p style="font-size:12px; color:#999; letter-spacing: 2px;">© 2026 DESIGN BY FIY</p>
+</footer>
+
+<script>
+    // Music Logic
+    var audio = document.getElementById("myAudio");
+    var musicIcon = document.getElementById("musicIcon");
+    var musicStatus = document.getElementById("musicStatus");
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            musicIcon.className = "fa fa-pause";
+            musicStatus.innerHTML = "Pause Music";
+        } else {
+            audio.pause();
+            musicIcon.className = "fa fa-play";
+            musicStatus.innerHTML = "Play Music";
+        }
+    }
+
+    // Scroll Reveal Logic
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+
+    // Mobile Nav Toggle
+    function toggleMobileNav() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else { 
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    window.addEventListener("scroll", reveal);
+    window.addEventListener("load", reveal);
+</script>
+
+</body>
+</html>
